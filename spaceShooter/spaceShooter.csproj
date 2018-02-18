@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
+    <Compile Include="GameWorld.cs" />
     <Compile Include="MainMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -23,11 +23,32 @@ namespace spaceShooter
             GameMenu.Parent = this;
             GameMenu.Dock = DockStyle.Fill;
            
-            GameMenu.Show();            
+            GameMenu.Show();
+
+            GameMenu.ItemChoosed += Menu_ItemChoosed;
         }
-        
+
         MainMenu GameMenu;
 
+        private void Menu_ItemChoosed(MenuItems menuItems)
+        {
+            switch (menuItems)
+            {
+                case MenuItems.NewGame:
+                    GameMenu.Dispose();
+                    GameMenu = null;
+                    StartGame();
+                    break;
+                case MenuItems.End:
+                    Application.Exit();
+                    break;
+            }
+        }
 
+        private void StartGame()
+        {
+            this.BackColor = Color.Black;
+            GameWorld game = new GameWorld(this);
+        }
     }
 }

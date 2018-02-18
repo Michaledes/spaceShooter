@@ -10,12 +10,6 @@ using System.Windows.Forms;
 
 namespace spaceShooter
 {
-
-    public enum MenuItems
-    {
-        NewGame, End
-    }
-
     public partial class MainMenu : UserControl
     {
         public MainMenu()
@@ -26,6 +20,8 @@ namespace spaceShooter
             this.DoubleBuffered = true;
 
             this.Paint += PaintEventoperation;
+
+            this.MouseDoubleClick += MainMenu_MouseClick;
         }
 
         MenuItems ChoosedItem;
@@ -75,6 +71,8 @@ namespace spaceShooter
         // generated service method
         private void MainMenu_MouseClick(object sender, MouseEventArgs e)
         {
+            int countOfClicks = e.Clicks;
+
             if (NewGameRectangle.Contains(e.Location))
             {
                 ChoosedItem = MenuItems.NewGame;
@@ -84,7 +82,17 @@ namespace spaceShooter
                 ChoosedItem = MenuItems.End;
             }
 
+            // discern double click
+            if (countOfClicks == 2)
+            {
+                ItemChoosed(ChoosedItem);
+            }
+
             Invalidate();
         }
+
+        public delegate void DelegateChoosingItem(MenuItems menuItems);
+
+        public event DelegateChoosingItem ItemChoosed;
     }
 }
